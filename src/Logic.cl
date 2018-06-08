@@ -1,6 +1,6 @@
 class Logic
 {
-    std () : Std { new Std };
+    std : Std <- new Std;
 
     and (x : Bool, y : Bool) : Bool
     {

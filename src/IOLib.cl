@@ -8,11 +8,11 @@ Module IOLib extracts
 
 class IOLib inherits IO
 {
-    std () : Std { new Std };
+    std : Std <- new Std;
 
     print (x : Object) : IO
     {
-        out_string(std().object().to_string(x))
+        out_string(std.object().to_string(x))
     };
 
     println (x : Object) : IO

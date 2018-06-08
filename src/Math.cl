@@ -1,6 +1,6 @@
 class Math
 {
-    std () : Std { new Std };
+    std : Std <- new Std;
 
     pow (b : Int, i : Int) : Int
     {

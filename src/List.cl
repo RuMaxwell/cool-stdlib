@@ -16,7 +16,7 @@ Cons from List
 
 class List (* General-typed linked list: an iterator *)
 {
-    std () : Std { new Std };
+    std : Std <- new Std;
 
     cons (x : Object) : List
     {
@@ -25,10 +25,10 @@ class List (* General-typed linked list: an iterator *)
     
     equal (r : List) : Bool
     {
-        if std().logic().and(is_null(), r.is_null()) then true else
+        if std.logic().and(is_null(), r.is_null()) then true else
         if is_null() then false else
         if r.is_null() then false else
-            if not std().object().equal(car(), r.car()) then false else
+            if not std.object().equal(car(), r.car()) then false else
                 cdr().equal(cdr())
             fi
         fi fi fi
@@ -49,9 +49,9 @@ class List (* General-typed linked list: an iterator *)
         let res : String <- "" in
         if is_null() then res else
         if cdr().is_null() then
-            res.concat(std().object().to_string(car())).concat(cdr().showbody())
+            res.concat(std.object().to_string(car())).concat(cdr().showbody())
         else
-            res.concat(std().object().to_string(car())).concat(",").concat(cdr().showbody())
+            res.concat(std.object().to_string(car())).concat(",").concat(cdr().showbody())
         fi fi
     };
 

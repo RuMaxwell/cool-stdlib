@@ -13,7 +13,7 @@ Module OBJECT extracts
 -- interfaces inside.
 class OBJECT inherits IO
 {
-    std () : Std { new Std };
+    std : Std <- new Std;
     
     type_not_conform_exception () : IO { out_string("Types of two parameters of method `equal' is not the same.\n") };
 
@@ -49,9 +49,9 @@ class OBJECT inherits IO
     to_string (o : Object) : String
     {
         case o of
-            x : Bool => std().bool().to_string(x);
-            x : Int => std().int().to_string(x);
-            x : String => std().string().to_string(x);
+            x : Bool => std.bool().to_string(x);
+            x : Int => std.int().to_string(x);
+            x : String => std.string().to_string(x);
             x : List => x.show();
             x : Pair => x.show();
             x : Pair_Int_Int => x.show();

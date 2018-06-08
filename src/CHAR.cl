@@ -16,7 +16,7 @@ Module CHAR extracts
 
 class CHAR (* single-char String: equal, compareable *)
 {
-    std () : Std { new Std };
+    std : Std <- new Std;
 
     chr (x : Int) : String
     {
@@ -129,7 +129,7 @@ class CHAR (* single-char String: equal, compareable *)
         
             -- wan e zhi yuan
             -- To use `int::to_string' here is dangerous. It may cause infinite calling loop.
-            -- (new String).concat("\\").concat(std().int().to_string(x))
+            -- (new String).concat("\\").concat(std.int().to_string(x))
             "?"
         
         fi fi fi fi fi fi fi fi fi
@@ -160,7 +160,7 @@ class CHAR (* single-char String: equal, compareable *)
     
     greater_equal (x : String, y : String) : Bool
     {
-        std().logic().or(greater_than(x, y), equal(x, y))
+        std.logic().or(greater_than(x, y), equal(x, y))
     };
     
     greater_than (x : String, y : String) : Bool
@@ -170,25 +170,25 @@ class CHAR (* single-char String: equal, compareable *)
     
     is_alpha (x : String) : Bool
     {
-        if std().logic().and(greater_equal(x, "A"), less_equal(x, "Z")) then true else
-        if std().logic().and(greater_equal(x, "a"), less_equal(x, "z")) then true else
+        if std.logic().and(greater_equal(x, "A"), less_equal(x, "Z")) then true else
+        if std.logic().and(greater_equal(x, "a"), less_equal(x, "z")) then true else
             false
         fi fi
     };
     
     is_alpha_digit (x : String) : Bool
     {
-        std().logic().or(is_alpha(x), is_digit(x))
+        std.logic().or(is_alpha(x), is_digit(x))
     };
     
     is_digit (x : String) : Bool
     {
-        std().logic().and(greater_equal(x, "0"), less_equal(x, "9"))
+        std.logic().and(greater_equal(x, "0"), less_equal(x, "9"))
     };
     
     less_equal (x : String, y : String) : Bool
     {
-        std().logic().or(less_than(x, y), equal(x, y))
+        std.logic().or(less_than(x, y), equal(x, y))
     };
     
     less_than (x : String, y : String) : Bool

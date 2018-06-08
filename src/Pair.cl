@@ -15,7 +15,7 @@ Pair_Int_Int from Pair
 
 class Pair (* general-typed *)
 {
-    std () : Std { new Std };
+    std : Std <- new Std;
 
     first : Object;
     second : Object;
@@ -29,9 +29,9 @@ class Pair (* general-typed *)
     show () : String
     {
         let s0 : String <- "(",
-            s1 : String <- std().object().to_string(first),
+            s1 : String <- std.object().to_string(first),
             s2 : String <- ", ",
-            s3 : String <- std().object().to_string(second),
+            s3 : String <- std.object().to_string(second),
             s4 : String <- ")"
         in
             s0.concat(s1).concat(s2).concat(s3).concat(s4)

@@ -74,36 +74,27 @@ Iterator:
 (*# NAMESPACE: Standard.Initialization #*)
 
 -- This class stands for the standard library. Add
---      std () : Std { new Std };
+--      std : Std <- new Std;
 -- to every class that uses the utilities of the standard library (this is called "include/import the library").
 -- This class initializes instances for all Standard.Toolkits and Standard.Types classes.
 -- These classes are designed only for providing functions, considered /static/.
 -- Directly creating and using instances of these standard library classes are not recommended,
 -- include the library and use
---      std().lib_name().method(...)
+--      std.lib_name().method(...)
 -- instead.
 class Std
 {
-    io_l : IOLib <- new IOLib;
-    logic_l : Logic <- new Logic;
-    math_l : Math <- new Math;
-    bool_l : BOOL <- new BOOL;
-    char_l : CHAR <- new CHAR;
-    int_l : INT <- new INT;
-    object_l : OBJECT <- new OBJECT;
-    string_l : STRING <- new STRING;
-
-
     std () : Std { self };
 
-    io () : IOLib { io_l };
-    logic () : Logic { logic_l };
-    math () : Math { math_l };
-    bool () : BOOL { bool_l };
-    char () : CHAR { char_l };
-    int () : INT { int_l };
-    object () : OBJECT { object_l };
-    string () : STRING { string_l };
+    io () : IOLib { new IOLib };
+    logic () : Logic { new Logic };
+    math () : Math { new Math };
+
+    bool () : BOOL { new BOOL };
+    char () : CHAR { new CHAR };
+    int () : INT { new INT };
+    object () : OBJECT { new OBJECT };
+    string () : STRING { new STRING };
     
     show () : String { "<Std instance>" };
 };

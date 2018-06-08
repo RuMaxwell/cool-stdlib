@@ -18,7 +18,7 @@ Module STRING extracts
 
 class STRING (* String: equal, comparable; an iterator *)
 {
-    std () : Std { new Std };
+    std : Std <- new Std;
 
     at (s : String, i : Int) : String
     {
@@ -28,7 +28,7 @@ class STRING (* String: equal, comparable; an iterator *)
 
     char_to_digit (x : String) : Int
     {
-        std().char().ord(x) - 48
+        std.char().ord(x) - 48
     };
     
     compare (sl : String, sr : String) : Int
@@ -38,10 +38,10 @@ class STRING (* String: equal, comparable; an iterator *)
             xsl : String <- tail(sl),
             xsr : String <- tail(sr)
         in
-            if std().logic().and(sl.length() = 0, sr.length() = 0) then 0 else
+            if std.logic().and(sl.length() = 0, sr.length() = 0) then 0 else
             if sl.length() = 0 then (0 - 1) else
             if sr.length() = 0 then 1 else
-            let cmp : Int <- std().char().compare(head(sl), tail(sl)) in
+            let cmp : Int <- std.char().compare(head(sl), tail(sl)) in
                 if cmp = 0 then compare(tail(sl), tail(sr)) else
                     cmp
                 fi
@@ -55,7 +55,7 @@ class STRING (* String: equal, comparable; an iterator *)
             xsl : String <- tail(sl),
             xsr : String <- tail(sr)
         in
-            if std().logic().and(sl.length() = 0, sr.length() = 0) then true else
+            if std.logic().and(sl.length() = 0, sr.length() = 0) then true else
             if sl.length() = 0 then false else
             if sr.length() = 0 then false else
                 if not head(sl) = head(sr) then false else
@@ -76,8 +76,8 @@ class STRING (* String: equal, comparable; an iterator *)
     
     digit_to_char (x : Int) : String
     {
-        if std().logic().and(x < 10, 0 <= x) then
-            std().char().chr(x + 48)
+        if std.logic().and(x < 10, 0 <= x) then
+            std.char().chr(x + 48)
         else
             { abort(); ""; }
         fi
@@ -95,7 +95,7 @@ class STRING (* String: equal, comparable; an iterator *)
     
     from_int (x : Int) : String
     {
-        std().int().to_string(x)
+        std.int().to_string(x)
     };
 
     tail (this : String) : String
@@ -107,7 +107,7 @@ class STRING (* String: equal, comparable; an iterator *)
     {
         let len : Int <- this.length() in
             if len = 0 then 0 else
-                char_to_digit(head(this)) * std().math().pow(10, len) + to_int(tail(this))
+                char_to_digit(head(this)) * std.math().pow(10, len) + to_int(tail(this))
             fi
     };
 

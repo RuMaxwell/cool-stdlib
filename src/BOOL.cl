@@ -8,7 +8,7 @@ Module BOOL extracts
 
 class BOOL
 {
-    std () : Std { new Std };
+    std : Std <- new Std;
 
     show () : String
     {

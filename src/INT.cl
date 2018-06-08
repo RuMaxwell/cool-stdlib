@@ -10,7 +10,7 @@ Module INT extracts
 
 class INT
 {
-    std () : Std { new Std };
+    std : Std <- new Std;
 
     abs (x : Int) : Int
     {
@@ -49,7 +49,7 @@ class INT
         let qr : Pair_Int_Int <- div_mod(x, 10),
             q : Int <- qr.ifst(),
             r : Int <- qr.isnd(),
-            rc : String <- std().string().digit_to_char(r)
+            rc : String <- std.string().digit_to_char(r)
         in
             if q = 0 then rc else
                 to_string(q).concat(rc)
