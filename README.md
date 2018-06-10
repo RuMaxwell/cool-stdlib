@@ -6,9 +6,9 @@ This repo contains some useful Cool libraries for cool programming. It is like t
 
 ## Document structure
 All the Cool library source files are in `src` directory. Their jobs are described as following:
-| File    | Description                                                                                                       |
-| ---     | ---                                                                                                               |
-| Std.cl  | The standard module, providing methods to regulate the references to every other *static* modules in the project. |
+| File   | Description                                                  |
+| ------ | ------------------------------------------------------------ |
+| Std.cl | The standard module, providing methods to regulate the references to every other *static* modules in the project. |
 
 In `bin` and `lib` there are executables and a reference file for the spim MIPS simulator. The executables are all under x86 Linux. `concat` concatinates Cool source files (it can also concatinate any other files); `coolc` is a Cool compiler provided by our compiler course, `spim` is a MIPS vitual machine still available under Linux distributions.
 
