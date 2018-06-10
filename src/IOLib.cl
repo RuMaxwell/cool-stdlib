@@ -10,6 +10,14 @@ class IOLib inherits IO
 {
     std : Std <- new Std;
 
+    read () : Object
+    {
+        let str : String <- in_string() in
+        {
+            std.string().eval(str)
+        }
+    };
+
     print (x : Object) : IO
     {
         out_string(std.object().to_string(x))

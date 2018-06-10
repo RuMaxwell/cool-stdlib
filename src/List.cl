@@ -7,11 +7,12 @@ List
     cdr () : List
     cons (Object) : List
     equal (List) : Bool
+    from_iterable (Object) : List
+    init (Object, List) : List
     is_null () : Bool
     show () : String
     showbody () : String
 Cons from List
-    init (Object, List) : List
 *)
 
 class List (* General-typed linked list: an iterator *)
@@ -32,6 +33,13 @@ class List (* General-typed linked list: an iterator *)
                 cdr().equal(cdr())
             fi
         fi fi fi
+    };
+
+    from_iterable (s : Object) : List
+    {
+        if std.iterator().is_null(s) then new List else
+            from_iterable(std.iterator().tail(s)).cons(std.iterator().head(s))
+        fi
     };
 
     is_null () : Bool

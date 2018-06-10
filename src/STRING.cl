@@ -2,23 +2,49 @@
 
 (*
 Module STRING extracts
+    all_digit (String) : Bool
+    any_digit (String) : Bool
     at (String, Int) : String
     char_to_digit (String) : Int
     compare (String, String) : Int
+    digit_to_char (Int) : String
     equal (String, String) : Bool
+    from_int (Int) : String
     head (String) : String
     initial (String) : String
-    digit_to_char (Int) : String
+    is_int (String) : Bool
+    -- is_list (String) : Bool
+    is_null (String) : Bool
+    -- is_pair (String) : Bool
     last (String) : String
+    show () : String
     tail (String) : String
-    to_str (String) : String
-    to_string () : String
     to_int (String) : Int
+    -- to_list (String) : List
+    -- to_pair (String) : Pair
+    to_string (String) : String
 *)
 
 class STRING (* String: equal, comparable; an iterator *)
 {
     std : Std <- new Std;
+
+    all_digit (s : String) : Bool
+    {
+        if is_null(s) then false else
+        if is_null(tail(s)) then std.char().is_digit(head(s)) else
+        if std.char().is_digit(head(s)) then all_number(tail(s)) else
+            false
+        fi fi
+    };
+
+    any_digit (s : String) : Bool
+    {
+        if is_null(s) then false else
+        if std.char().is_digit(head(s)) then true else
+            any_digit(tail(s))
+        fi fi
+    };
 
     at (s : String, i : Int) : String
     {
@@ -48,6 +74,15 @@ class STRING (* String: equal, comparable; an iterator *)
             fi fi fi
     };
 
+    digit_to_char (x : Int) : String
+    {
+        if std.logic().and(x < 10, 0 <= x) then
+            std.char().chr(x + 48)
+        else
+            { std.value_error().raise(); ""; }
+        fi
+    };
+
     equal (sl : String, sr : String) : Bool
     {
         let xl : String <- head(sl),
@@ -64,28 +99,54 @@ class STRING (* String: equal, comparable; an iterator *)
             fi fi fi
     };
 
-    head (this : String) : String
+    eval (str : String) : Object
     {
-        this.substr(0, 1)
+        if is_int(str) then to_int(str) else
+        if is_list(str) then to_list(str) else
+        if is_pair(str) then to_pair(str) else
+            str
+        fi fi fi
     };
 
-    initial (this : String) : String
+    head (s : String) : String
     {
-        this.substr(0, this.length() - 1)
+        s.substr(0, 1)
     };
+
+    initial (s : String) : String
+    {
+        s.substr(0, s.length() - 1)
+    };
+
+    is_int (s : String) : Bool
+    {
+        -- How I wish Cool can pass function as value
+        -- if std.iterator().all(std.char().is_digit, s)
+        all_number (s)
+    };
+
+    is_list (s : String) : Bool
+    {{
+        std.not_implemented().raise();
+        false;
+    }};
+
+    is_null (s : String) : Bool
+    {
+        s.length() = 0
+    };
+
+    is_pair (s : String) : Bool
+    {{
+        -- remove whitespaces
+        -- do checking
+        std.not_implemented().raise();
+        false;
+    }};
     
-    digit_to_char (x : Int) : String
+    last (s : String) : String
     {
-        if std.logic().and(x < 10, 0 <= x) then
-            std.char().chr(x + 48)
-        else
-            { abort(); ""; }
-        fi
-    };
-
-    last (this : String) : String
-    {
-        this.substr(this.length() - 1, this.length())
+        s.substr(s.length() - 1, s.length())
     };
 
     show () : String
@@ -98,22 +159,34 @@ class STRING (* String: equal, comparable; an iterator *)
         std.int().to_string(x)
     };
 
-    tail (this : String) : String
+    tail (s : String) : String
     {
-        this.substr(1, this.length())
+        s.substr(1, s.length())
     };
     
-    to_int (this : String) : Int
+    to_int (s : String) : Int
     {
-        let len : Int <- this.length() in
+        let len : Int <- s.length() in
             if len = 0 then 0 else
-                char_to_digit(head(this)) * std.math().pow(10, len) + to_int(tail(this))
+                char_to_digit(head(s)) * std.math().pow(10, len) + to_int(tail(s))
             fi
     };
 
-    to_string (this : String) : String
+    to_list (s : String) : List
+    {{
+        std.not_implemented().raise();
+        new List;
+    }};
+
+    to_pair (s : String) : Pair
+    {{
+        std.not_implemented().raise();
+        new Pair;
+    }};
+
+    to_string (s : String) : String
     {
-        "\"".concat(this).concat("\"")
+        "\"".concat(s).concat("\"")
     };
 };
 

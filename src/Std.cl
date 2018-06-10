@@ -12,10 +12,16 @@ Concatination order:
 -- Standard.Initialization
 Std.cl
 
+-- Standard.Exceptions
+Exceptions.cl
+
 -- Standard.Toolkits
 IOLib.cl
 Logic.cl
 Math.cl
+
+-- Standard.Intefaces
+Iterator.cl
 
 -- Standard.Types
 BOOL.cl
@@ -86,9 +92,20 @@ class Std
 {
     std () : Std { self };
 
+    exception () : Exception { (new Exception).default() };
+    exception_msg (msg : String) : Exception { (new Exception).message(msg) };
+    not_an_iterator () : Not_An_Iterator_Exception { (new Not_An_Iterator_Exception).default() };
+    not_an_iterator_msg (msg : String) : Not_An_Iterator_Exception { (new Not_An_Iterator_Exception).message(msg) };
+    not_implemented () : Not_Implemented_Exception { (new Not_Implemented_Exception).default() };
+    not_implemented_msg (msg : String) : Not_Implemented_Exception { (new Not_Implemented_Exception).message(msg) }; 
+    value_error () : Value_Error { (new Value_Error).default() };
+    value_error_msg (msg : String) : Value_Error { (new Value_Error).message(msg) };
+
     io () : IOLib { new IOLib };
     logic () : Logic { new Logic };
     math () : Math { new Math };
+
+    iterator () : Iterator { new Iterator };
 
     bool () : BOOL { new BOOL };
     char () : CHAR { new CHAR };
